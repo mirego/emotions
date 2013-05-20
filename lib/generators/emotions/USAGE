@@ -1,0 +1,3 @@
+Description:
+  The emotions:install generator generates a migration that will
+  create the `emotions` table in your database.

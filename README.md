@@ -24,13 +24,17 @@ $ rails generate emotions:install
 
 ## Usage
 
-Here’s what I want to be able to do with Emotions:
+Configure the allowed emotions.
 
 ```ruby
 Emotions.configure do |config|
   config.emotions = [:happy, :sad]
 end
+```
 
+Create a couple of models.
+
+```ruby
 class Picture < ActiveRecord::Base
   acts_as_emotive
 end
@@ -38,7 +42,11 @@ end
 class User < ActiveRecord::Base
   acts_as_emotional
 end
+```
 
+Express emotions towards other records.
+
+```ruby
 user = User.find(1)
 picture = Picture.find(2)
 
@@ -50,10 +58,14 @@ user.emotions_about(picture)
 user.happy_about?(picture)
 # => true
 
-user.not_sad_about!(picture)
+user.no_longer_sad_about!(picture)
 user.sad_about?(picture)
 # => false
 
 picture.happy_about.map(&:emotional)
 # => [#<User id=1>]
+
+user.express!(:sad, picture)
+user.sad_about?(picure)
+# => true
 ```

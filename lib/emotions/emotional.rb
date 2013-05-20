@@ -14,6 +14,14 @@ module Emotions
           def emotions_about(emotive)
             _emotions_about(emotive).map(&:emotion).map(&:to_sym)
           end
+
+          def express!(emotion, emotive)
+            send("\#{emotion}_about!", emotive)
+          end
+
+          def no_longer_express!(emotion, emotive)
+            send("no_longer_\#{emotion}_about!", emotive)
+          end
         RUBY
 
         Emotions.emotions.each do |emotion|
@@ -30,7 +38,7 @@ module Emotions
               #{emotion}_about(emotive).first_or_create!
             end
 
-            def not_#{emotion}_about!(emotive)
+            def no_longer_#{emotion}_about!(emotive)
               #{emotion}_about(emotive).destroy
             end
 

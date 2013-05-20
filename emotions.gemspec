@@ -8,8 +8,8 @@ Gem::Specification.new do |spec|
   spec.version       = Emotions::VERSION
   spec.authors       = ["Rémi Prévost"]
   spec.email         = ["remi@exomel.com"]
-  spec.description   = 'Emotions is a Ruby library that allows ActiveRecord records to express (and hopefully stores) emotions about other records.'
-  spec.summary       = 'Emotions is a Ruby library that allows ActiveRecord records to express (and hopefully stores) emotions about other records.'
+  spec.description   = 'Emotions is a Ruby library that allows ActiveRecord records to express (and hopefully store) emotions about other records.'
+  spec.summary       = 'Emotions is a Ruby library that allows ActiveRecord records to express (and hopefully store) emotions about other records.'
   spec.homepage      = 'https://github.com/remiprev/emotions'
   spec.license       = "MIT"
 

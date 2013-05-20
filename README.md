@@ -1,6 +1,6 @@
 # Emotions
 
-Emotions is a Ruby library that allows ActiveRecord records to express (and hopefully stores) emotions about other records.
+Emotions is a Ruby library that allows ActiveRecord records to express (and hopefully store) emotions about other records.
 
 ## Installation
 

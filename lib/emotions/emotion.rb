@@ -12,5 +12,15 @@ module Emotions
     # Associations
     belongs_to :emotional, polymorphic: true
     belongs_to :emotive, polymorphic: true
+
+    # Callbacks
+    after_create :update_emotion_counter
+    after_destroy :update_emotion_counter
+
+  protected
+
+    def update_emotion_counter
+      self.emotive.update_emotion_counter(self.emotion)
+    end
   end
 end

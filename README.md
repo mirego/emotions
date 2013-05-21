@@ -69,3 +69,17 @@ user.express!(:sad, picture)
 user.sad_about?(picure)
 # => true
 ```
+
+Most of the times, you would want to get a quick look at about how many users expressed a certain emotion towards a certain picture. That could be an expensive operation.
+
+However, if the *emotive* record has an `<emotion>_emotions_count` column, Emotions will populate its value with how many users expressed that emotion towards it.
+
+```ruby
+user.happy_about!(picture)
+
+picture.happy_about.count
+# SQL query that counts records and returns `1`
+
+picture.happy_emotions_count
+# Quick lookup into the column and returns `1`
+```

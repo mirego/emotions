@@ -2,12 +2,10 @@ class AddEmotions < ActiveRecord::Migration
   def up
     create_table :emotions do |t|
       # The emotional model
-      t.string :emotional_type
-      t.integer :emotional_id
+      t.references :emotional, polymorphic: true
 
       # The emotive model
-      t.string :emotive_type
-      t.integer :emotive_id
+      t.references :emotive, polymorphic: true
 
       # The type of emotion
       t.string :emotion

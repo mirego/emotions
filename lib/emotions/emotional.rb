@@ -3,7 +3,7 @@ module Emotions
     extend ActiveSupport::Concern
 
     included do
-      has_many :emotions, as: :emotional, class_name: 'Emotions::Emotion'
+      has_many :emotions, as: :emotional, class_name: 'Emotions::Emotion', dependent: :destroy
 
       Emotions.emotions.each do |emotion|
         define_emotion_methods(emotion)

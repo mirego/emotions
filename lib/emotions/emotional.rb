@@ -38,7 +38,8 @@ module Emotions
           end
 
           def #{emotion}_about!(emotive)
-            #{emotion}_about(emotive).first_or_create!
+            emotion = #{emotion}_about(emotive).first_or_initialize
+            emotion.save!
           end
 
           def no_longer_#{emotion}_about!(emotive)

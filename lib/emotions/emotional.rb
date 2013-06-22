@@ -30,11 +30,11 @@ module Emotions
       def define_emotion_methods(emotion)
         class_eval <<-RUBY, __FILE__, __LINE__ + 1
           def #{emotion}_about?(emotive)
-            #{emotion}_about(emotive).exists?
+            !!#{emotion}_about(emotive).exists?
           end
 
           def #{emotion}_about?(emotive)
-            #{emotion}_about(emotive).exists?
+            !!#{emotion}_about(emotive).exists?
           end
 
           def #{emotion}_about!(emotive)

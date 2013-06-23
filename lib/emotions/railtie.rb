@@ -12,6 +12,14 @@ module Emotions
         def self.acts_as_emotional
           self.send :include, Emotions::Emotional
         end
+
+        def self.emotional?
+          !!@emotional
+        end
+
+        def self.emotive?
+          !!@emotive
+        end
       end
     end
   end

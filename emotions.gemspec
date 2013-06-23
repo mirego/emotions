@@ -11,7 +11,7 @@ Gem::Specification.new do |spec|
   spec.description   = 'Emotions is a Ruby library that allows ActiveRecord records to express (and hopefully store) emotions about other records.'
   spec.summary       = 'Emotions is a Ruby library that allows ActiveRecord records to express (and hopefully store) emotions about other records.'
   spec.homepage      = 'https://github.com/mirego/emotions'
-  spec.license       = "New BSD"
+  spec.license       = "BSD 3-Clause"
 
   spec.files         = `git ls-files`.split($/)
   spec.executables   = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }

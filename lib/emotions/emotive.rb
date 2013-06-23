@@ -28,6 +28,8 @@ module Emotions
           def #{emotion}_about
             emotional_about.where(emotion: #{emotion.to_s.inspect})
           end
+          alias #{emotion}_with #{emotion}_about
+          alias #{emotion}_over #{emotion}_about
         RUBY
       end
     end

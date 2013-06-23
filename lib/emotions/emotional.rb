@@ -38,13 +38,13 @@ module Emotions
 
           def #{emotion}_about!(emotive)
             emotion = #{emotion}_about(emotive).first_or_initialize
-            emotion.save!
+            emotion.tap(&:save!)
           end
           alias #{emotion}_with! #{emotion}_about!
           alias #{emotion}_over! #{emotion}_about!
 
           def no_longer_#{emotion}_about!(emotive)
-            #{emotion}_about(emotive).destroy_all
+            #{emotion}_about(emotive).first.tap(&:destroy)
           end
           alias no_longer_#{emotion}_with! no_longer_#{emotion}_about!
           alias no_longer_#{emotion}_over! no_longer_#{emotion}_about!

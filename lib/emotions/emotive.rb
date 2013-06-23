@@ -10,10 +10,6 @@ module Emotions
       end
     end
 
-    def emotional_about
-      self.emotions.includes(:emotional)
-    end
-
     def update_emotion_counter(emotion)
       attribute = :"#{emotion}_emotions_count"
 
@@ -26,8 +22,10 @@ module Emotions
       def define_emotion_methods(emotion)
         class_eval <<-RUBY, __FILE__, __LINE__ + 1
           def #{emotion}_about
-            emotional_about.where(emotion: #{emotion.to_s.inspect})
+            self.emotions.where(emotion: #{emotion.to_s.inspect})
           end
+          alias #{emotion}_with #{emotion}_about
+          alias #{emotion}_over #{emotion}_about
         RUBY
       end
     end

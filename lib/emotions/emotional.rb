@@ -59,7 +59,7 @@ module Emotions
 
         instance_eval <<-RUBY, __FILE__, __LINE__ + 1
           def #{emotion}_about(emotive)
-            emotional_ids = Emotions::Emotion.where(emotive_id: emotive.id, emotive_type: emotive.class.name, emotional_type: self.name).pluck(:emotional_id)
+            emotional_ids = emotive.#{emotion}_about.where(emotional_type: self.name).pluck(:emotional_id)
             self.where(id: emotional_ids)
           end
           alias #{emotion}_with #{emotion}_about

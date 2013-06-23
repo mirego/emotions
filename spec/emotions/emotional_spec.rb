@@ -43,25 +43,25 @@ describe Emotions::Emotional do
       let(:picture) { Picture.create }
       let(:other_picture) { Picture.create }
 
-      it { expect(user.happy_about?(picture)).to be_true }
-      it { expect(user.happy_about?(other_picture)).to be_false }
+      it { expect(user.happy_about? picture).to be_true }
+      it { expect(user.happy_about? other_picture).to be_false }
     end
 
     describe :emotion_about! do
       let(:picture) { Picture.create }
 
-      it { expect(user.happy_about!(picture)).to be_instance_of(Emotions::Emotion) }
-      it { expect{ user.happy_about!(picture) }.to change{ Emotions::Emotion.count }.from(0).to(1) }
-      it { expect{ user.happy_about!(picture) }.to change{ user.happy_about?(picture) }.from(false).to(true) }
+      it { expect(user.happy_about! picture).to be_instance_of(Emotions::Emotion) }
+      it { expect{ user.happy_about! picture }.to change{ Emotions::Emotion.count }.from(0).to(1) }
+      it { expect{ user.happy_about! picture }.to change{ user.happy_about? picture }.from(false).to(true) }
     end
 
     describe :no_longer_emotion_about! do
       before { user.happy_about!(picture) }
       let(:picture) { Picture.create }
 
-      it { expect(user.no_longer_happy_about!(picture)).to be_instance_of(Emotions::Emotion) }
-      it { expect{ user.no_longer_happy_about!(picture) }.to change{ Emotions::Emotion.count }.from(1).to(0) }
-      it { expect{ user.no_longer_happy_about!(picture) }.to change{ user.happy_about?(picture) }.from(true).to(false) }
+      it { expect(user.no_longer_happy_about! picture).to be_instance_of(Emotions::Emotion) }
+      it { expect{ user.no_longer_happy_about! picture }.to change{ Emotions::Emotion.count }.from(1).to(0) }
+      it { expect{ user.no_longer_happy_about! picture }.to change{ user.happy_about? picture }.from(true).to(false) }
     end
   end
 

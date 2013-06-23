@@ -38,6 +38,23 @@ describe Emotions::Emotional do
       it { should respond_to :happy_over }
     end
 
+    describe :emotions_about do
+      let(:picture) { Picture.create }
+
+      context 'for user with emotions' do
+        before do
+          user.happy_about! picture
+          user.sad_about! picture
+        end
+
+        it { expect(user.emotions_about(picture)).to eql [:happy, :sad] }
+      end
+
+      context 'for user without emotions' do
+        it { expect(user.emotions_about(picture)).to be_empty }
+      end
+    end
+
     describe :emotion_about? do
       before { user.happy_about!(picture) }
       let(:picture) { Picture.create }

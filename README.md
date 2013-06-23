@@ -62,8 +62,8 @@ user.no_longer_sad_about!(picture)
 user.sad_about?(picture)
 # => false
 
-picture.happy_about.map(&:emotional)
-# => [#<User id=1>]
+User.happy_about(picture)
+# => #<ActiveRecord::Relation [#<User id=1>]>
 
 user.express!(:sad, picture)
 user.sad_about?(picure)

@@ -6,7 +6,7 @@ module Emotions
     validates :emotional, presence: true
     validates :emotive, presence: true
     validates_each :emotion do |record, attr, value|
-      record.errors.add attr, 'invalid' unless Emotions.emotions.include?(value.try(:to_sym))
+      record.errors.add attr, I18n.t(:invalid, scope: [:errors, :messages]) unless Emotions.emotions.include?(value.try(:to_sym))
     end
 
     # Associations

@@ -55,6 +55,21 @@ describe Emotions::Emotional do
       end
     end
 
+    describe :express! do
+      let(:picture) { Picture.create }
+
+      it { expect{ user.express! :happy, picture }.to change{ Emotions::Emotion.count }.from(0).to(1) }
+      it { expect{ user.express! :happy, picture }.to change{ user.happy_about? picture }.from(false).to(true) }
+    end
+
+    describe :no_longer_express! do
+      let(:picture) { Picture.create }
+      before { user.happy_about!(picture) }
+
+      it { expect{ user.no_longer_express! :happy, picture }.to change{ Emotions::Emotion.count }.from(1).to(0) }
+      it { expect{ user.no_longer_express! :happy, picture }.to change{ user.happy_about? picture }.from(true).to(false) }
+    end
+
     describe :DynamicMethods do
       describe :emotion_about? do
         before { user.happy_about!(picture) }

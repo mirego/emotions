@@ -1,9 +1,9 @@
-require "emotions/version"
+require 'emotions/version'
 
-require "active_record"
-require "emotions/emotion"
-require "emotions/emotive"
-require "emotions/emotional"
+require 'active_record'
+require 'emotions/emotion'
+require 'emotions/emotive'
+require 'emotions/emotional'
 
 module Emotions
   def self.configure

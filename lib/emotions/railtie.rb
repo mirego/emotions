@@ -3,7 +3,7 @@ require 'rails'
 
 module Emotions
   class Railtie < Rails::Railtie
-    initializer "emotions.active_record" do |app|
+    initializer 'emotions.active_record' do |app|
       ActiveSupport.on_load :active_record do
         def self.acts_as_emotive
           self.send :include, Emotions::Emotive

@@ -21,4 +21,9 @@ RSpec.configure do |config|
     # Run our migration
     run_default_migration
   end
+
+  config.after(:each) do
+    # Make sure we remove our test database file
+    cleanup_database
+  end
 end

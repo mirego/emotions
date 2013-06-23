@@ -20,17 +20,16 @@ describe Emotions::Emotive do
 
   describe :InstanceMethods do
     describe :update_emotion_counter do
-      let(:user1) { User.create }
-      let(:user2) { User.create }
-      let(:user3) { User.create }
-
-      before do
-        user1.happy_about! picture
-        user3.happy_about! picture
-        picture.reload
+      let(:relation) do
+        double.tap { |double| double.stub(:count).and_return(42) }
       end
 
-      it { expect(picture.happy_emotions_count).to eql 2 }
+      before do
+        Picture.any_instance.stub(:happy_about).and_return(relation)
+        picture.update_emotion_counter(:happy)
+      end
+
+      it { expect(picture.reload.happy_emotions_count).to eql 42 }
     end
   end
 end

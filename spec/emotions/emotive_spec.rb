@@ -6,7 +6,10 @@ describe Emotions::Emotive do
 
     run_migration do
       create_table(:users, force: true)
-      create_table(:pictures, force: true)
+      create_table(:pictures, force: true) do |t|
+        t.integer :happy_emotions_count, default: 0
+        t.integer :sad_emotions_count, default: 0
+      end
     end
 
     emotional 'User'
@@ -16,15 +19,7 @@ describe Emotions::Emotive do
   let(:picture) { Picture.create }
 
   describe :InstanceMethods do
-    describe :Aliases do
-      subject { picture }
-
-      it { should respond_to :happy_about }
-      it { should respond_to :happy_with }
-      it { should respond_to :happy_over }
-    end
-
-    describe :emotion_about do
+    describe :update_emotion_counter do
       let(:user1) { User.create }
       let(:user2) { User.create }
       let(:user3) { User.create }
@@ -32,9 +27,10 @@ describe Emotions::Emotive do
       before do
         user1.happy_about! picture
         user3.happy_about! picture
+        picture.reload
       end
 
-      it { expect(picture.happy_about.map(&:emotional)).to eql [user1, user3] }
+      it { expect(picture.happy_emotions_count).to eql 2 }
     end
   end
 end

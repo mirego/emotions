@@ -64,4 +64,28 @@ describe Emotions::Emotional do
       it { expect{ user.no_longer_happy_about!(picture) }.to change{ user.happy_about?(picture) }.from(true).to(false) }
     end
   end
+
+  describe :ClassMethods do
+    describe :Aliases do
+      subject { user.class }
+
+      it { should respond_to :happy_about }
+      it { should respond_to :happy_with }
+      it { should respond_to :happy_over }
+    end
+
+    describe :emotion_about do
+      let(:first_other_user) { User.create }
+      let(:second_other_user) { User.create }
+      let(:picture) { Picture.create }
+
+      before do
+        user.happy_about! picture
+        first_other_user.happy_about! picture
+      end
+
+      it { expect(User.happy_about(picture).to_a).to eql [user, first_other_user] }
+      it { expect(User.happy_about(picture).where('id != ?', first_other_user.id).to_a).to eql [user] }
+    end
+  end
 end

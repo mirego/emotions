@@ -15,7 +15,7 @@ module Emotions
     end
 
     def emotions_about(emotive)
-      _emotions_about(emotive).map(&:emotion).map(&:to_sym)
+      _emotions_about(emotive).pluck(:emotion).map(&:to_sym)
     end
 
     def express!(emotion, emotive)

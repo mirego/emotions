@@ -38,19 +38,29 @@ module Emotions
 
           def #{emotion}_about!(emotive)
             emotion = #{emotion}_about(emotive).first_or_initialize
-            emotion.save!
+            emotion.tap(&:save!)
           end
           alias #{emotion}_with! #{emotion}_about!
           alias #{emotion}_over! #{emotion}_about!
 
           def no_longer_#{emotion}_about!(emotive)
-            #{emotion}_about(emotive).destroy_all
+            #{emotion}_about(emotive).first.tap(&:destroy)
           end
           alias no_longer_#{emotion}_with! no_longer_#{emotion}_about!
           alias no_longer_#{emotion}_over! no_longer_#{emotion}_about!
 
           def #{emotion}_about(emotive)
             _emotions_about(emotive).where(emotion: #{emotion.to_s.inspect})
+          end
+          alias #{emotion}_with #{emotion}_about
+          alias #{emotion}_over #{emotion}_about
+
+        RUBY
+
+        instance_eval <<-RUBY, __FILE__, __LINE__ + 1
+          def #{emotion}_about(emotive)
+            emotional_ids = Emotions::Emotion.where(emotive_id: emotive.id, emotive_type: emotive.class.name, emotional_type: self.name).pluck(:emotional_id)
+            self.where(id: emotional_ids)
           end
           alias #{emotion}_with #{emotion}_about
           alias #{emotion}_over #{emotion}_about

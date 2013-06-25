@@ -1,6 +1,7 @@
 require 'emotions/version'
 
 require 'active_record'
+require 'emotions/errors'
 require 'emotions/emotion'
 require 'emotions/emotive'
 require 'emotions/emotional'

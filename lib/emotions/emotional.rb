@@ -38,13 +38,18 @@ module Emotions
 
           def #{emotion}_about!(emotive)
             emotion = #{emotion}_about(emotive).first_or_initialize
-            emotion.tap(&:save!)
+
+            begin
+              emotion.tap(&:save!)
+            rescue ActiveRecord::RecordInvalid => e
+              raise InvalidEmotion.new(e.record)
+            end
           end
           alias #{emotion}_with! #{emotion}_about!
           alias #{emotion}_over! #{emotion}_about!
 
           def no_longer_#{emotion}_about!(emotive)
-            #{emotion}_about(emotive).first.tap(&:destroy)
+            #{emotion}_about(emotive).first.tap { |e| e.try(:destroy) }
           end
           alias no_longer_#{emotion}_with! no_longer_#{emotion}_about!
           alias no_longer_#{emotion}_over! no_longer_#{emotion}_about!
@@ -59,8 +64,13 @@ module Emotions
 
         instance_eval <<-RUBY, __FILE__, __LINE__ + 1
           def #{emotion}_about(emotive)
-            emotional_ids = emotive.#{emotion}_about.where(emotional_type: self.name).pluck(:emotional_id)
-            self.where(id: emotional_ids)
+            if emotive.class.emotive?
+              emotional_ids = emotive.#{emotion}_about.where(emotional_type: self.name).pluck(:emotional_id)
+              where(id: emotional_ids)
+            else
+              # ActiveRecord 4 supports `.none`, not ActiveRecord 3
+              respond_to?(:none) ? none : where('1 = 0')
+            end
           end
           alias #{emotion}_with #{emotion}_about
           alias #{emotion}_over #{emotion}_about

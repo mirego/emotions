@@ -73,7 +73,7 @@ describe Emotions::Emotional do
       end
 
       context 'with invalid emotion' do
-        it { expect{ user.express! :mad, picture }.to raise_error(NoMethodError) }
+        it { expect{ user.express! :mad, picture }.to raise_error(Emotions::InvalidEmotion) }
       end
     end
 
@@ -91,7 +91,7 @@ describe Emotions::Emotional do
       end
 
       context 'with invalid emotion' do
-        it { expect{ user.no_longer_express! :mad, user }.to raise_error(NoMethodError) }
+        it { expect{ user.no_longer_express! :mad, user }.to_not raise_error }
       end
     end
 

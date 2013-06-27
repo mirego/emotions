@@ -10,14 +10,16 @@ module Emotions
       end
     end
 
+    # @private
     def update_emotion_counter(emotion)
-      attribute = :"#{emotion}_emotions_count"
+      attribute = "#{emotion}_emotions_count"
 
       if self.respond_to?(attribute)
         self.update_attribute(attribute, self.send("#{emotion}_about").count)
       end
     end
 
+    # @private
     module ClassMethods
       def define_emotion_methods(emotion)
         class_eval <<-RUBY, __FILE__, __LINE__ + 1

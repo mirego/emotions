@@ -35,11 +35,11 @@ end
 Create a couple of models.
 
 ```ruby
-class Picture < ActiveRecord::Base
+class Picture < ActiveRecord::Base
   acts_as_emotive
 end
 
-class User < ActiveRecord::Base
+class User < ActiveRecord::Base
   acts_as_emotional
 end
 ```

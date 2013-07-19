@@ -18,7 +18,7 @@ module Emotions
       end
 
       def create_migration_file
-        migration_template 'migration.rb', 'db/migrate/emotions_migration.rb'
+        migration_template 'migration.rb', 'db/migrate/add_emotions.rb'
       end
     end
   end

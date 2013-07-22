@@ -1,5 +1,6 @@
 require 'emotions/version'
 
+require 'ostruct'
 require 'active_record'
 require 'emotions/errors'
 require 'emotions/emotion'

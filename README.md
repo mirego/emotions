@@ -1,6 +1,7 @@
 # Emotions
 
 [![Gem Version](https://badge.fury.io/rb/emotions.png)](https://rubygems.org/gems/emotions)
+[![Code Climate](https://codeclimate.com/github/mirego/emotions.png)](https://codeclimate.com/github/mirego/emotions)
 [![Build Status](https://travis-ci.org/mirego/emotions.png?branch=master)](https://travis-ci.org/mirego/emotions)
 
 Emotions is a Ruby library that allows ActiveRecord records to express (and hopefully store) emotions about other records.

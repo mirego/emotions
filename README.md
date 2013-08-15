@@ -1,10 +1,17 @@
-# Emotions
+<p align="center">
+  <br />
+  <a href="https://github.com/mirego/emotions">
+    <img src="http://i.imgur.com/V0qh3lo.png" alt="Emotions" />
+  </a>
+  <br />
+  Emotions is a Ruby library that allows ActiveRecord records to<br /> express (and hopefully store) emotions about other records.
+  <br /><br />
+  <a href="https://rubygems.org/gems/emotions"><img src="https://badge.fury.io/rb/emotions.png" /></a>
+  <a href="https://codeclimate.com/github/mirego/emotions"><img src="https://codeclimate.com/github/mirego/emotions.png" /></a>
+  <a href="https://travis-ci.org/mirego/emotions"><img src="https://travis-ci.org/mirego/emotions.png?branch=master" /></a>
+</p>
 
-[![Gem Version](https://badge.fury.io/rb/emotions.png)](https://rubygems.org/gems/emotions)
-[![Code Climate](https://codeclimate.com/github/mirego/emotions.png)](https://codeclimate.com/github/mirego/emotions)
-[![Build Status](https://travis-ci.org/mirego/emotions.png?branch=master)](https://travis-ci.org/mirego/emotions)
-
-Emotions is a Ruby library that allows ActiveRecord records to express (and hopefully store) emotions about other records.
+---
 
 ## Installation
 

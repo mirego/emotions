@@ -1,7 +1,6 @@
 <p align="center">
-  <br />
   <a href="https://github.com/mirego/emotions">
-    <img src="http://i.imgur.com/V0qh3lo.png" alt="Emotions" />
+    <img src="http://i.imgur.com/9fhaEY4.png" alt="Emotions" />
   </a>
   <br />
   Emotions is a Ruby library that allows ActiveRecord records to<br /> express (and hopefully store) emotions about other records.

@@ -6,23 +6,10 @@ module Emotions
     validates :emotional, presence: true
     validates :emotive, presence: true
 
-    validates_each :emotion do |record, attr, value|
-      unless Emotions.emotions.include?(value.try(:to_sym))
-        record.errors.add attr, I18n.t(:invalid, scope: [:errors, :messages])
-      end
-    end
-
-    validates_each :emotional do |record, attr, value|
-      if value.blank? || !value.class.try(:emotional?)
-        record.errors.add attr, I18n.t(:invalid, scope: [:errors, :messages])
-      end
-    end
-
-    validates_each :emotive do |record, attr, value|
-      if value.blank? || !value.class.try(:emotive?)
-        record.errors.add attr, I18n.t(:invalid, scope: [:errors, :messages])
-      end
-    end
+    # Custom validations
+    validate :ensure_valid_emotion_name
+    validate { ensure_valid_associated_record :emotional }
+    validate { ensure_valid_associated_record :emotive }
 
     # Associations
     belongs_to :emotional, polymorphic: true
@@ -34,8 +21,27 @@ module Emotions
 
   protected
 
+    # Update the `<emotion>_emotions_counter` for the emotive record
     def update_emotion_counter
       self.emotive.update_emotion_counter(self.emotion)
+    end
+
+    # Make sure we're using an allowed emotion name
+    def ensure_valid_emotion_name
+      unless Emotions.emotions.include?(self.emotion.try(:to_sym))
+        errors.add :emotion, I18n.t(:invalid, scope: [:errors, :messages])
+      end
+    end
+
+    # Make sure that both emotive and emotional records are actually able to
+    # express and/or receive emotions
+    def ensure_valid_associated_record(association)
+      value = send(association)
+      predicate = :"#{association}?"
+
+      if !value.class.respond_to?(predicate) || !value.class.send(predicate)
+        errors.add association, I18n.t(:invalid, scope: [:errors, :messages])
+      end
     end
   end
 end

@@ -88,6 +88,43 @@ picture.happy_emotions_count
 # Quick lookup into the column and returns `1`
 ```
 
+## Callbacks
+
+You can define callbacks that will be triggered before or after an emotion is created.
+
+If a `before_emotive` or `before_emotional` callback returns `false`, it will halt the call and the relationship will be not be saved (much like `ActiveRecords`’s `before_save` callbacks).
+
+```ruby
+class Picture < ActiveRecord::Base
+  acts_as_emotive
+  after_emotive :send_notification
+
+  def send_notification
+    puts "#{emotion.emotional} is now #{emotion.emotion} about #{self}"
+  end
+end
+
+class User < ActiveRecord::Base
+  acts_as_emotional
+  before_emotional :ensure_active_emotive
+
+  def ensure_active_emotive
+    emotion.emotive.respond_to?(:active?) && emotion.emotive.active?
+  end
+end
+```
+
+You can access to the related emotion data with the `emotion` method (eg. `emotion.emotion`, `emotion.emotive`, `emotion.emotional`). The available callbacks are:
+
+## Emotive
+
+| Emotive                    | Emotional                    |
+| ---------------------------|------------------------------|
+| `before_emotive`           | `before_emotional`           |
+| `after_emotive`            | `after_emotional`            |
+| `before_no_longer_emotive` | `before_no_longer_emotional` |
+| `after_no_longer_emotive`  | `after_no_longer_emotional`  |
+
 ## License
 
 `Emotions` is © 2013 [Mirego](http://www.mirego.com) and may be freely distributed under the [New BSD license](http://opensource.org/licenses/BSD-3-Clause).  See the [`LICENSE.md`](https://github.com/mirego/emotions/blob/master/LICENSE.md) file.

@@ -94,6 +94,18 @@ picture.happy_emotions_count
 # Quick lookup into the column and returns `1`
 ```
 
+Same thing for emotional records. If there’s a `happy_emotions_count` column in the `User` model, Emotions will update it each time a record expresses a happy emotion towards another record.
+
+```ruby
+user.happy_about!(picture)
+
+user.happy_about.count
+# SQL query that counts records and returns `1`
+
+user.happy_emotions_count
+# Quick lookup into the column and returns `1`
+```
+
 ## License
 
 `Emotions` is © 2013 [Mirego](http://www.mirego.com) and may be freely distributed under the [New BSD license](http://opensource.org/licenses/BSD-3-Clause).  See the [`LICENSE.md`](https://github.com/mirego/emotions/blob/master/LICENSE.md) file.

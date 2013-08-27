@@ -24,6 +24,7 @@ module Emotions
     # Update the `<emotion>_emotions_counter` for the emotive record
     def update_emotion_counter
       self.emotive.update_emotion_counter(self.emotion)
+      self.emotional.update_emotion_counter(self.emotion)
     end
 
     # Make sure we're using an allowed emotion name

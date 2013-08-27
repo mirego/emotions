@@ -61,10 +61,12 @@ describe Emotions::Emotion do
   describe :Callbacks do
     describe :update_emotion_counter_on_create do
       let(:picture) { Picture.create }
-      let(:emotion) { described_class.new(emotion: 'happy', emotional: User.create, emotive: picture) }
+      let(:user) { User.create }
+      let(:emotion) { described_class.new(emotion: 'happy', emotional: user, emotive: picture) }
 
       before do
         picture.should_receive(:update_emotion_counter).with('happy').once
+        user.should_receive(:update_emotion_counter).with('happy').once
         emotion.should_receive(:update_emotion_counter).once.and_call_original
       end
 
@@ -73,11 +75,13 @@ describe Emotions::Emotion do
 
     describe :update_emotion_counter_on_destroy do
       let(:picture) { Picture.create }
-      let(:emotion) { described_class.new(emotion: 'happy', emotional: User.create, emotive: picture) }
+      let(:user) { User.create }
+      let(:emotion) { described_class.new(emotion: 'happy', emotional: user, emotive: picture) }
 
       before do
         emotion.save!
         picture.should_receive(:update_emotion_counter).with('happy').once
+        user.should_receive(:update_emotion_counter).with('happy').once
         emotion.should_receive(:update_emotion_counter).once.and_call_original
       end
 

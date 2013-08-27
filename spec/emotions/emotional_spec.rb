@@ -5,7 +5,10 @@ describe Emotions::Emotional do
     emotions :happy, :sad
 
     run_migration do
-      create_table(:users, force: true)
+      create_table(:users, force: true) do |t|
+        t.integer :happy_emotions_count, default: 0
+        t.integer :sad_emotions_count, default: 0
+      end
       create_table(:pictures, force: true)
     end
 
@@ -139,6 +142,20 @@ describe Emotions::Emotional do
           it { expect(user.no_longer_happy_about! user).to be_nil }
           it { expect{ user.no_longer_happy_about! user }.to_not raise_error }
         end
+      end
+
+      describe :update_emotion_counter do
+        let(:user) { User.create }
+        let(:relation) do
+          double.tap { |double| double.stub(:count).and_return(42) }
+        end
+
+        before do
+          User.any_instance.stub(:happy_about).and_return(relation)
+          user.update_emotion_counter(:happy)
+        end
+
+        it { expect(user.reload.happy_emotions_count).to eql 42 }
       end
     end
   end

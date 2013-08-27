@@ -54,6 +54,15 @@ module Emotions
       _emotions_about(emotive).where(emotion: emotion).first.tap { |e| e.try(:destroy) }
     end
 
+    # @private
+    def update_emotion_counter(emotion)
+      attribute = "#{emotion}_emotions_count"
+
+      if self.respond_to?(attribute)
+        self.update_attribute(attribute, send("#{emotion}_about").count)
+      end
+    end
+
     module ClassMethods
       # Return an `ActiveRecord::Relation` containing the emotional records
       # that expressed a specific emotion towards an emotive record
@@ -88,8 +97,9 @@ module Emotions
             no_longer_express! #{emotion.inspect}, emotive
           end
 
-          def #{emotion}_about(emotive)
-            _emotions_about(emotive).where(emotion: #{emotion.to_s.inspect})
+          def #{emotion}_about(emotive = nil)
+            relation = emotive.nil? ? self.emotions : _emotions_about(emotive)
+            relation.where(emotion: #{emotion.to_s.inspect})
           end
 
           alias #{emotion}? #{emotion}_about?

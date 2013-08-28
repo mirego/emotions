@@ -80,9 +80,11 @@ user.sad_about?(picure)
 # => true
 ```
 
+## Cache counters
+
 Most of the times, you would want to get a quick look at about how many users expressed a certain emotion towards a certain picture. That could be an expensive operation.
 
-However, if the *emotive* record has an `<emotion>_emotions_count` column, Emotions will populate its value with how many users expressed that emotion towards it.
+However, if the *emotive* record has an `<emotion>_emotions_count` column, Emotions will populate its value with how many emotional records expressed that emotion towards it.
 
 ```ruby
 user.happy_about!(picture)
@@ -94,7 +96,7 @@ picture.happy_emotions_count
 # Quick lookup into the column and returns `1`
 ```
 
-Same thing for emotional records. If there’s a `happy_emotions_count` column in the `User` model, Emotions will update it each time a record expresses a happy emotion towards another record.
+Same thing for emotional records. If there’s a `<emotion>_emotions_count` column in the emotional model, Emotions will update it each time one of its records expresses that emotion towards another record.
 
 ```ruby
 user.happy_about!(picture)

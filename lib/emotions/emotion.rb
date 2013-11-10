@@ -18,6 +18,10 @@ module Emotions
     # Callbacks
     after_create :update_emotion_counter
     after_destroy :update_emotion_counter
+    before_save :set_newly_expressed
+
+    # Attributes
+    attr_accessor :newly_expressed
 
   protected
 
@@ -43,6 +47,12 @@ module Emotions
       if !value.class.respond_to?(predicate) || !value.class.send(predicate)
         errors.add association, I18n.t(:invalid, scope: [:errors, :messages])
       end
+    end
+
+    # Update the `newly_expressed` variable if it's a new record
+    def set_newly_expressed
+      @newly_expressed = self.new_record?
+      true
     end
   end
 end

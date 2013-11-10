@@ -20,8 +20,10 @@ module Emotions
     after_destroy :update_emotion_counter
     before_save :set_newly_expressed
 
-    # Attributes
-    attr_accessor :newly_expressed
+    # Is it a new emotions?
+    def newly_expressed?
+      @newly_expressed || false
+    end
 
   protected
 

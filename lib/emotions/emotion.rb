@@ -22,7 +22,7 @@ module Emotions
 
     # Is it a new emotions?
     def newly_expressed?
-      @newly_expressed || false
+      !!@newly_expressed
     end
 
   protected

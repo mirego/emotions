@@ -80,6 +80,16 @@ user.sad_about?(picure)
 # => true
 ```
 
+Determine if it's a new emotion.
+
+```ruby
+user.express!(:sad, picture).newly_expressed?
+# => true
+
+user.express!(:sad, picture).newly_expressed?
+# => false
+```
+
 ## Cache counters
 
 Most of the times, you would want to get a quick look at about how many users expressed a certain emotion towards a certain picture. That could be an expensive operation.

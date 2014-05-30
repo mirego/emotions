@@ -18,6 +18,12 @@ module Emotions
     # Callbacks
     after_create :update_emotion_counter
     after_destroy :update_emotion_counter
+    before_create { @newly_expressed = true }
+
+    # Is it a new emotions?
+    def newly_expressed?
+      !!@newly_expressed
+    end
 
   protected
 

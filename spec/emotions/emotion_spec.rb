@@ -87,5 +87,20 @@ describe Emotions::Emotion do
 
       it { emotion.destroy }
     end
+
+    describe :set_newly_expressed_on_save do
+      let(:picture) { Picture.create }
+      let(:user) { User.create }
+
+      context 'with a newly expressed emotion' do
+        it { user.express!(:happy, picture).newly_expressed?.should be_true }
+      end
+
+      context 'with an already expressed emotion' do
+        before { user.happy_about! picture }
+
+        it { user.express!(:happy, picture).newly_expressed?.should be_false }
+      end
+    end
   end
 end

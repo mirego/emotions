@@ -20,6 +20,10 @@ module Emotions
       def create_migration_file
         migration_template 'migration.rb', 'db/migrate/add_emotions.rb'
       end
+
+      def create_model_file
+        template "model.rb", "app/models/emotion.rb"
+      end
     end
   end
 end

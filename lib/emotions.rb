@@ -27,6 +27,10 @@ module Emotions
         self.send :include, Emotions::Emotional
       end
 
+      def self.acts_as_emotion
+        self.send :include, Emotions::Emotion
+      end
+
       def self.emotional?
         @emotional ||= self.ancestors.include?(Emotions::Emotional)
       end

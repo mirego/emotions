@@ -22,6 +22,11 @@ RSpec.configure do |config|
 
     # Run our migration
     run_default_migration
+
+    # Create Emotion model
+    spawn_model 'Emotion', ActiveRecord::Base do
+      acts_as_emotion
+    end
   end
 
   config.after(:each) do

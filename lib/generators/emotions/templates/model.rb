@@ -1,3 +1,3 @@
 class Emotion < ActiveRecord::Base
-  acts_as_model
+  acts_as_emotion
 end

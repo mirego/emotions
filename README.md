@@ -26,7 +26,7 @@ And then execute:
 $ bundle
 ```
 
-Run the migration to add the `emotions` table:
+Run the migration to add the `emotions` table and the `Emotion` model:
 
 ```bash
 $ rails generate emotions:install

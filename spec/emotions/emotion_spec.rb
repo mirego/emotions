@@ -18,7 +18,7 @@ describe Emotions::Emotion do
 
   describe :Validations do
     describe :validate_presence_of_emotional do
-      subject { described_class.new(emotion: 'happy', emotive: Picture.create) }
+      subject { Emotion.new(emotion: 'happy', emotive: Picture.create) }
       before { subject.valid? }
 
       it { should_not be_valid }
@@ -26,7 +26,7 @@ describe Emotions::Emotion do
     end
 
     describe :validate_presence_of_emotive do
-      subject { described_class.new(emotion: 'happy', emotional: User.create) }
+      subject { Emotion.new(emotion: 'happy', emotional: User.create) }
       before { subject.valid? }
 
       it { should_not be_valid }
@@ -34,7 +34,7 @@ describe Emotions::Emotion do
     end
 
     describe :validate_inclusion_of_emotion do
-      subject { described_class.new(emotion: 'mad', emotional: User.create, emotive: Picture.create) }
+      subject { Emotion.new(emotion: 'mad', emotional: User.create, emotive: Picture.create) }
       before { subject.valid? }
 
       it { should_not be_valid }
@@ -42,7 +42,7 @@ describe Emotions::Emotion do
     end
 
     describe :validate_class_of_emotive do
-      subject { described_class.new(emotion: 'happy', emotional: User.create, emotive: User.create) }
+      subject { Emotion.new(emotion: 'happy', emotional: User.create, emotive: User.create) }
       before { subject.valid? }
 
       it { should_not be_valid }
@@ -50,7 +50,7 @@ describe Emotions::Emotion do
     end
 
     describe :validate_class_of_emotional do
-      subject { described_class.new(emotion: 'happy', emotional: Picture.create, emotive: Picture.create) }
+      subject { Emotion.new(emotion: 'happy', emotional: Picture.create, emotive: Picture.create) }
       before { subject.valid? }
 
       it { should_not be_valid }
@@ -62,7 +62,7 @@ describe Emotions::Emotion do
     describe :update_emotion_counter_on_create do
       let(:picture) { Picture.create }
       let(:user) { User.create }
-      let(:emotion) { described_class.new(emotion: 'happy', emotional: user, emotive: picture) }
+      let(:emotion) { Emotion.new(emotion: 'happy', emotional: user, emotive: picture) }
 
       before do
         picture.should_receive(:update_emotion_counter).with('happy').once
@@ -76,7 +76,7 @@ describe Emotions::Emotion do
     describe :update_emotion_counter_on_destroy do
       let(:picture) { Picture.create }
       let(:user) { User.create }
-      let(:emotion) { described_class.new(emotion: 'happy', emotional: user, emotive: picture) }
+      let(:emotion) { Emotion.new(emotion: 'happy', emotional: user, emotive: picture) }
 
       before do
         emotion.save!

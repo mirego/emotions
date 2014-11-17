@@ -67,7 +67,7 @@ describe Emotions::Emotional do
       let(:picture) { Picture.create }
 
       context 'with valid emotive and emotion' do
-        it { expect{ user.express! :happy, picture }.to change{ Emotions::Emotion.count }.from(0).to(1) }
+        it { expect{ user.express! :happy, picture }.to change{ Emotion.count }.from(0).to(1) }
         it { expect{ user.express! :happy, picture }.to change{ user.happy_about? picture }.from(false).to(true) }
       end
 
@@ -85,7 +85,7 @@ describe Emotions::Emotional do
       before { user.happy_about!(picture) }
 
       context 'with valid emotive and emotion' do
-        it { expect{ user.no_longer_express! :happy, picture }.to change{ Emotions::Emotion.count }.from(1).to(0) }
+        it { expect{ user.no_longer_express! :happy, picture }.to change{ Emotion.count }.from(1).to(0) }
         it { expect{ user.no_longer_express! :happy, picture }.to change{ user.happy_about? picture }.from(true).to(false) }
       end
 
@@ -118,8 +118,7 @@ describe Emotions::Emotional do
         let(:picture) { Picture.create }
 
         context 'with valid emotive' do
-          it { expect(user.happy_about! picture).to be_instance_of(Emotions::Emotion) }
-          it { expect{ user.happy_about! picture }.to change{ Emotions::Emotion.count }.from(0).to(1) }
+          it { expect{ user.happy_about! picture }.to change{ Emotion.count }.from(0).to(1) }
           it { expect{ user.happy_about! picture }.to change{ user.happy_about? picture }.from(false).to(true) }
         end
 
@@ -133,8 +132,7 @@ describe Emotions::Emotional do
         let(:picture) { Picture.create }
 
         context 'with valid emotive' do
-          it { expect(user.no_longer_happy_about! picture).to be_instance_of(Emotions::Emotion) }
-          it { expect{ user.no_longer_happy_about! picture }.to change{ Emotions::Emotion.count }.from(1).to(0) }
+          it { expect{ user.no_longer_happy_about! picture }.to change{ Emotion.count }.from(1).to(0) }
           it { expect{ user.no_longer_happy_about! picture }.to change{ user.happy_about? picture }.from(true).to(false) }
         end
 

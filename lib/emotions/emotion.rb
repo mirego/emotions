@@ -1,23 +1,25 @@
 module Emotions
-  class Emotion < ActiveRecord::Base
-    self.table_name = 'emotions'
+  module Emotion
+    extend ActiveSupport::Concern
 
-    # Validations
-    validates :emotional, presence: true
-    validates :emotive, presence: true
+    included do
+      # Validations
+      validates :emotional, presence: true
+      validates :emotive, presence: true
 
-    # Custom validations
-    validate :ensure_valid_emotion_name
-    validate { ensure_valid_associated_record :emotional }
-    validate { ensure_valid_associated_record :emotive }
+      # Custom validations
+      validate :ensure_valid_emotion_name
+      validate { ensure_valid_associated_record :emotional }
+      validate { ensure_valid_associated_record :emotive }
 
-    # Associations
-    belongs_to :emotional, polymorphic: true
-    belongs_to :emotive, polymorphic: true
+      # Associations
+      belongs_to :emotional, polymorphic: true
+      belongs_to :emotive, polymorphic: true
 
-    # Callbacks
-    after_create :update_emotion_counter
-    after_destroy :update_emotion_counter
+      # Callbacks
+      after_create :update_emotion_counter
+      after_destroy :update_emotion_counter
+    end
 
   protected
 

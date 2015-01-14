@@ -22,23 +22,23 @@ describe Emotions::Emotional do
     describe :Aliases do
       subject { user }
 
-      it { should respond_to :happy? }
+      it { expect(subject).to respond_to :happy? }
 
-      it { should respond_to :happy_about? }
-      it { should respond_to :happy_with? }
-      it { should respond_to :happy_over? }
+      it { expect(subject).to respond_to :happy_about? }
+      it { expect(subject).to respond_to :happy_with? }
+      it { expect(subject).to respond_to :happy_over? }
 
-      it { should respond_to :happy_about! }
-      it { should respond_to :happy_with! }
-      it { should respond_to :happy_over! }
+      it { expect(subject).to respond_to :happy_about! }
+      it { expect(subject).to respond_to :happy_with! }
+      it { expect(subject).to respond_to :happy_over! }
 
-      it { should respond_to :no_longer_happy_about! }
-      it { should respond_to :no_longer_happy_with! }
-      it { should respond_to :no_longer_happy_over! }
+      it { expect(subject).to respond_to :no_longer_happy_about! }
+      it { expect(subject).to respond_to :no_longer_happy_with! }
+      it { expect(subject).to respond_to :no_longer_happy_over! }
 
-      it { should respond_to :happy_about }
-      it { should respond_to :happy_with }
-      it { should respond_to :happy_over }
+      it { expect(subject).to respond_to :happy_about }
+      it { expect(subject).to respond_to :happy_with }
+      it { expect(subject).to respond_to :happy_over }
     end
 
     describe :emotions_about do
@@ -105,8 +105,8 @@ describe Emotions::Emotional do
         let(:other_picture) { Picture.create }
 
         context 'with valid emotive' do
-          it { expect(user.happy_about? picture).to be_true }
-          it { expect(user.happy_about? other_picture).to be_false }
+          it { expect(user.happy_about? picture).to be_truthy }
+          it { expect(user.happy_about? other_picture).to be_falsey }
         end
 
         context 'with invalid emotive' do
@@ -144,12 +144,10 @@ describe Emotions::Emotional do
 
       describe :update_emotion_counter do
         let(:user) { User.create }
-        let(:relation) do
-          double.tap { |double| double.stub(:count).and_return(42) }
-        end
+        let(:relation) { double(count: 42) }
 
         before do
-          User.any_instance.stub(:happy_about).and_return(relation)
+          allow_any_instance_of(User).to receive(:happy_about).and_return(relation)
           user.update_emotion_counter(:happy)
         end
 
@@ -162,9 +160,9 @@ describe Emotions::Emotional do
     describe :Aliases do
       subject { user.class }
 
-      it { should respond_to :happy_about }
-      it { should respond_to :happy_with }
-      it { should respond_to :happy_over }
+      it { expect(subject).to respond_to :happy_about }
+      it { expect(subject).to respond_to :happy_with }
+      it { expect(subject).to respond_to :happy_over }
     end
 
     describe :DynamicMethods do

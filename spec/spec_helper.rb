@@ -16,6 +16,11 @@ RSpec.configure do |config|
   config.include DatabaseMacros
   config.include ModelMacros
 
+  # Disable `should` syntax
+  config.expect_with :rspec do |c|
+    c.syntax = :expect
+  end
+
   config.before(:each) do
     # Create the SQLite database
     setup_database

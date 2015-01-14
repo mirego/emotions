@@ -20,12 +20,10 @@ describe Emotions::Emotive do
 
   describe :InstanceMethods do
     describe :update_emotion_counter do
-      let(:relation) do
-        double.tap { |double| double.stub(:count).and_return(42) }
-      end
+      let(:relation) { double(count: 42) }
 
       before do
-        Picture.any_instance.stub(:happy_about).and_return(relation)
+        allow_any_instance_of(Picture).to receive(:happy_about).and_return(relation)
         picture.update_emotion_counter(:happy)
       end
 

@@ -21,7 +21,7 @@ describe Emotions::Emotion do
       subject { Emotion.new(emotion: 'happy', emotive: Picture.create) }
       before { subject.valid? }
 
-      it { should_not be_valid }
+      it { expect(subject).not_to be_valid }
       it { expect(subject.errors.full_messages).to eql ["Emotional can't be blank", "Emotional is invalid"] }
     end
 
@@ -29,7 +29,7 @@ describe Emotions::Emotion do
       subject { Emotion.new(emotion: 'happy', emotional: User.create) }
       before { subject.valid? }
 
-      it { should_not be_valid }
+      it { expect(subject).not_to be_valid }
       it { expect(subject.errors.full_messages).to eql ["Emotive can't be blank", "Emotive is invalid"] }
     end
 
@@ -37,7 +37,7 @@ describe Emotions::Emotion do
       subject { Emotion.new(emotion: 'mad', emotional: User.create, emotive: Picture.create) }
       before { subject.valid? }
 
-      it { should_not be_valid }
+      it { expect(subject).not_to be_valid }
       it { expect(subject.errors.full_messages).to eql ["Emotion is invalid"] }
     end
 
@@ -45,7 +45,7 @@ describe Emotions::Emotion do
       subject { Emotion.new(emotion: 'happy', emotional: User.create, emotive: User.create) }
       before { subject.valid? }
 
-      it { should_not be_valid }
+      it { expect(subject).not_to be_valid }
       it { expect(subject.errors.full_messages).to eql ["Emotive is invalid"] }
     end
 
@@ -53,7 +53,7 @@ describe Emotions::Emotion do
       subject { Emotion.new(emotion: 'happy', emotional: Picture.create, emotive: Picture.create) }
       before { subject.valid? }
 
-      it { should_not be_valid }
+      it { expect(subject).not_to be_valid }
       it { expect(subject.errors.full_messages).to eql ["Emotional is invalid"] }
     end
   end
@@ -65,9 +65,9 @@ describe Emotions::Emotion do
       let(:emotion) { Emotion.new(emotion: 'happy', emotional: user, emotive: picture) }
 
       before do
-        picture.should_receive(:update_emotion_counter).with('happy').once
-        user.should_receive(:update_emotion_counter).with('happy').once
-        emotion.should_receive(:update_emotion_counter).once.and_call_original
+        expect(picture).to receive(:update_emotion_counter).with('happy').once
+        expect(user).to receive(:update_emotion_counter).with('happy').once
+        expect(emotion).to receive(:update_emotion_counter).once.and_call_original
       end
 
       it { emotion.save! }
@@ -80,9 +80,9 @@ describe Emotions::Emotion do
 
       before do
         emotion.save!
-        picture.should_receive(:update_emotion_counter).with('happy').once
-        user.should_receive(:update_emotion_counter).with('happy').once
-        emotion.should_receive(:update_emotion_counter).once.and_call_original
+        expect(picture).to receive(:update_emotion_counter).with('happy').once
+        expect(user).to receive(:update_emotion_counter).with('happy').once
+        expect(emotion).to receive(:update_emotion_counter).once.and_call_original
       end
 
       it { emotion.destroy }

@@ -59,7 +59,7 @@ describe Emotions::Emotional do
 
       context 'for invalid emotive' do
         it { expect(user.emotions_about(user)).to be_empty }
-        it { expect{ user.emotions_about(user) }.to_not raise_error }
+        it { expect { user.emotions_about(user) }.to_not raise_error }
       end
     end
 
@@ -67,16 +67,16 @@ describe Emotions::Emotional do
       let(:picture) { Picture.create }
 
       context 'with valid emotive and emotion' do
-        it { expect{ user.express! :happy, picture }.to change{ Emotion.count }.from(0).to(1) }
-        it { expect{ user.express! :happy, picture }.to change{ user.happy_about? picture }.from(false).to(true) }
+        it { expect { user.express! :happy, picture }.to change { Emotion.count }.from(0).to(1) }
+        it { expect { user.express! :happy, picture }.to change { user.happy_about? picture }.from(false).to(true) }
       end
 
       context 'with invalid emotive' do
-        it { expect{ user.express! :happy, user }.to raise_error(Emotions::InvalidEmotion) }
+        it { expect { user.express! :happy, user }.to raise_error(Emotions::InvalidEmotion) }
       end
 
       context 'with invalid emotion' do
-        it { expect{ user.express! :mad, picture }.to raise_error(Emotions::InvalidEmotion) }
+        it { expect { user.express! :mad, picture }.to raise_error(Emotions::InvalidEmotion) }
       end
     end
 
@@ -85,16 +85,16 @@ describe Emotions::Emotional do
       before { user.happy_about!(picture) }
 
       context 'with valid emotive and emotion' do
-        it { expect{ user.no_longer_express! :happy, picture }.to change{ Emotion.count }.from(1).to(0) }
-        it { expect{ user.no_longer_express! :happy, picture }.to change{ user.happy_about? picture }.from(true).to(false) }
+        it { expect { user.no_longer_express! :happy, picture }.to change { Emotion.count }.from(1).to(0) }
+        it { expect { user.no_longer_express! :happy, picture }.to change { user.happy_about? picture }.from(true).to(false) }
       end
 
       context 'with invalid emotive' do
-        it { expect{ user.no_longer_express! :happy, user }.to_not raise_error }
+        it { expect { user.no_longer_express! :happy, user }.to_not raise_error }
       end
 
       context 'with invalid emotion' do
-        it { expect{ user.no_longer_express! :mad, user }.to_not raise_error }
+        it { expect { user.no_longer_express! :mad, user }.to_not raise_error }
       end
     end
 
@@ -124,7 +124,7 @@ describe Emotions::Emotional do
         end
 
         context 'with invalid emotive' do
-          it { expect{ user.happy_about? user }.to_not raise_error }
+          it { expect { user.happy_about? user }.to_not raise_error }
         end
       end
 
@@ -132,12 +132,12 @@ describe Emotions::Emotional do
         let(:picture) { Picture.create }
 
         context 'with valid emotive' do
-          it { expect{ user.happy_about! picture }.to change{ Emotion.count }.from(0).to(1) }
-          it { expect{ user.happy_about! picture }.to change{ user.happy_about? picture }.from(false).to(true) }
+          it { expect { user.happy_about! picture }.to change { Emotion.count }.from(0).to(1) }
+          it { expect { user.happy_about! picture }.to change { user.happy_about? picture }.from(false).to(true) }
         end
 
         context 'with invalid emotive' do
-          it { expect{ user.happy_about! user }.to raise_error(Emotions::InvalidEmotion) }
+          it { expect { user.happy_about! user }.to raise_error(Emotions::InvalidEmotion) }
         end
       end
 
@@ -146,13 +146,13 @@ describe Emotions::Emotional do
         let(:picture) { Picture.create }
 
         context 'with valid emotive' do
-          it { expect{ user.no_longer_happy_about! picture }.to change{ Emotion.count }.from(1).to(0) }
-          it { expect{ user.no_longer_happy_about! picture }.to change{ user.happy_about? picture }.from(true).to(false) }
+          it { expect { user.no_longer_happy_about! picture }.to change { Emotion.count }.from(1).to(0) }
+          it { expect { user.no_longer_happy_about! picture }.to change { user.happy_about? picture }.from(true).to(false) }
         end
 
         context 'with invalid emotive' do
           it { expect(user.no_longer_happy_about! user).to be_nil }
-          it { expect{ user.no_longer_happy_about! user }.to_not raise_error }
+          it { expect { user.no_longer_happy_about! user }.to_not raise_error }
         end
       end
 
@@ -197,7 +197,7 @@ describe Emotions::Emotional do
 
         context 'with invalid emotive' do
           it { expect(User.happy_about(user).to_a).to be_empty }
-          it { expect{ User.happy_about(user).to_a }.to_not raise_error }
+          it { expect { User.happy_about(user).to_a }.to_not raise_error }
         end
       end
     end

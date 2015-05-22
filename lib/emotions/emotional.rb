@@ -12,7 +12,7 @@ module Emotions
 
     # @private
     def _emotions_about(emotive)
-      self.emotions.where(emotive_id: emotive.id, emotive_type: emotive.class.name)
+      emotions.where(emotive_id: emotive.id, emotive_type: emotive.class.name)
     end
 
     # Return all emotions expressed by the emotional record
@@ -58,8 +58,8 @@ module Emotions
     def update_emotion_counter(emotion)
       attribute = "#{emotion}_emotions_count"
 
-      if self.respond_to?(attribute)
-        self.update_attribute(attribute, send("#{emotion}_about").count)
+      if respond_to?(attribute)
+        update_attribute(attribute, send("#{emotion}_about").count)
       end
     end
 
@@ -85,7 +85,7 @@ module Emotions
       #   # => #<ActiveRecord::Relation [#<User id=1>]>
       def emotional_about(emotion, emotive)
         if emotive.class.emotive?
-          emotional_ids = emotive.emotions.where(emotion: emotion).where(emotional_type: self.name).pluck(:emotional_id)
+          emotional_ids = emotive.emotions.where(emotion: emotion).where(emotional_type: name).pluck(:emotional_id)
           where(id: emotional_ids)
         else
           # ActiveRecord 4 supports `.none`, not ActiveRecord 3
@@ -93,6 +93,7 @@ module Emotions
         end
       end
 
+      # rubocop:disable MethodLength
       def define_emotion_methods(emotion)
         class_eval <<-RUBY, __FILE__, __LINE__ + 1
           def #{emotion}_about?(emotive)
@@ -108,7 +109,7 @@ module Emotions
           end
 
           def #{emotion}_about(emotive = nil)
-            relation = emotive.nil? ? self.emotions : _emotions_about(emotive)
+            relation = emotive.nil? ? emotions : _emotions_about(emotive)
             relation.where(emotion: #{emotion.to_s.inspect})
           end
 
@@ -135,6 +136,7 @@ module Emotions
           alias #{emotion}_over #{emotion}_about
         RUBY
       end
+      # rubocop:enable MethodLength
     end
   end
 end

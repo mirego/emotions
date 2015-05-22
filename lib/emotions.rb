@@ -18,25 +18,25 @@ module Emotions
   end
 
   def self.inject_into_active_record
-    @inject_into_active_record ||= Proc.new do
+    @inject_into_active_record ||= proc do
       def self.acts_as_emotive
-        self.send :include, Emotions::Emotive
+        send :include, Emotions::Emotive
       end
 
       def self.acts_as_emotional
-        self.send :include, Emotions::Emotional
+        send :include, Emotions::Emotional
       end
 
       def self.acts_as_emotion
-        self.send :include, Emotions::Emotion
+        send :include, Emotions::Emotion
       end
 
       def self.emotional?
-        @emotional ||= self.ancestors.include?(Emotions::Emotional)
+        @emotional ||= ancestors.include?(Emotions::Emotional)
       end
 
       def self.emotive?
-        @emotive ||= self.ancestors.include?(Emotions::Emotive)
+        @emotive ||= ancestors.include?(Emotions::Emotive)
       end
     end
   end

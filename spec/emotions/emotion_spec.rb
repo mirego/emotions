@@ -22,7 +22,7 @@ describe Emotions::Emotion do
       before { subject.valid? }
 
       it { expect(subject).not_to be_valid }
-      it { expect(subject.errors.full_messages).to eql ["Emotional can't be blank", "Emotional is invalid"] }
+      it { expect(subject.errors.full_messages).to eql ['Emotional can\'t be blank', 'Emotional is invalid'] }
     end
 
     describe :validate_presence_of_emotive do
@@ -30,7 +30,7 @@ describe Emotions::Emotion do
       before { subject.valid? }
 
       it { expect(subject).not_to be_valid }
-      it { expect(subject.errors.full_messages).to eql ["Emotive can't be blank", "Emotive is invalid"] }
+      it { expect(subject.errors.full_messages).to eql ['Emotive can\'t be blank', 'Emotive is invalid'] }
     end
 
     describe :validate_inclusion_of_emotion do
@@ -38,7 +38,7 @@ describe Emotions::Emotion do
       before { subject.valid? }
 
       it { expect(subject).not_to be_valid }
-      it { expect(subject.errors.full_messages).to eql ["Emotion is invalid"] }
+      it { expect(subject.errors.full_messages).to eql ['Emotion is invalid'] }
     end
 
     describe :validate_class_of_emotive do
@@ -46,7 +46,7 @@ describe Emotions::Emotion do
       before { subject.valid? }
 
       it { expect(subject).not_to be_valid }
-      it { expect(subject.errors.full_messages).to eql ["Emotive is invalid"] }
+      it { expect(subject.errors.full_messages).to eql ['Emotive is invalid'] }
     end
 
     describe :validate_class_of_emotional do
@@ -54,7 +54,7 @@ describe Emotions::Emotion do
       before { subject.valid? }
 
       it { expect(subject).not_to be_valid }
-      it { expect(subject.errors.full_messages).to eql ["Emotional is invalid"] }
+      it { expect(subject.errors.full_messages).to eql ['Emotional is invalid'] }
     end
   end
 

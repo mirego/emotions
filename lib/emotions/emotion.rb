@@ -25,13 +25,13 @@ module Emotions
 
     # Update the `<emotion>_emotions_counter` for the emotive record
     def update_emotion_counter
-      self.emotive.update_emotion_counter(self.emotion)
-      self.emotional.update_emotion_counter(self.emotion)
+      emotive.update_emotion_counter(emotion)
+      emotional.update_emotion_counter(emotion)
     end
 
     # Make sure we're using an allowed emotion name
     def ensure_valid_emotion_name
-      unless Emotions.emotions.include?(self.emotion.try(:to_sym))
+      unless Emotions.emotions.include?(emotion.try(:to_sym))
         errors.add :emotion, I18n.t(:invalid, scope: [:errors, :messages])
       end
     end

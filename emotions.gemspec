@@ -13,7 +13,7 @@ Gem::Specification.new do |spec|
   spec.homepage      = 'https://github.com/mirego/emotions'
   spec.license       = 'BSD 3-Clause'
 
-  spec.files         = `git ls-files`.split($/)
+  spec.files         = `git ls-files`.split($INPUT_RECORD_SEPARATOR)
   spec.executables   = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
   spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
   spec.require_paths = ['lib']
@@ -24,4 +24,6 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'bundler', '~> 1.3'
   spec.add_development_dependency 'rspec', '~> 3.1'
   spec.add_development_dependency 'sqlite3', '~> 1.3'
+  spec.add_development_dependency 'phare', '~> 0.7'
+  spec.add_development_dependency 'rubocop', '0.31'
 end

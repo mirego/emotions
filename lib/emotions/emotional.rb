@@ -63,6 +63,16 @@ module Emotions
       end
     end
 
+    # Find if an emotion is expressed towards another record
+    #
+    # @example
+    #   user = User.first
+    #   picture = Picture.first
+    #   user.express? :happy, picture
+    def express?(emotion, emotive)
+      _emotions_about(emotive).where(emotion: emotion).any?
+    end
+
     module ClassMethods
       # Return an `ActiveRecord::Relation` containing the emotional records
       # that expressed a specific emotion towards an emotive record

@@ -98,6 +98,20 @@ describe Emotions::Emotional do
       end
     end
 
+    describe :express? do
+      let(:picture) { Picture.create }
+
+      context 'when expressed' do
+        before { user.happy_about!(picture) }
+
+        it { expect(user.express? :happy, picture).to be_truthy }
+      end
+
+      context 'when not expressed' do
+        it { expect(user.express? :happy, picture).to be_falsey }
+      end
+    end
+
     describe :DynamicMethods do
       describe :emotion_about? do
         before { user.happy_about!(picture) }

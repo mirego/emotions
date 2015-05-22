@@ -10,7 +10,7 @@ class AddEmotions < ActiveRecord::Migration
       # The type of emotion
       t.string :emotion
 
-      t.timestamps
+      t.timestamps null: false
     end
 
     add_index :emotions, [:emotional_type, :emotional_id, :emotive_type, :emotive_id, :emotion], unique: true, name: 'index_emotions_by_emotional_emotive_and_emotion'
